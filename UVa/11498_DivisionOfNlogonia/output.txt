@@ -1,0 +1,10 @@
+NE
+divisa
+NO
+divisa
+NE
+SO
+SE
+NO
+SE
+divisa
