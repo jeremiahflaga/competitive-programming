@@ -9,14 +9,15 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <cstdio>
 
 using namespace std;
 
 int main()
 {
 
-	//freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+	freopen("input.txt", "r", stdin);
+	freopen("output.txt", "w", stdout);
 
 	string code;
 	string sortedCode;
