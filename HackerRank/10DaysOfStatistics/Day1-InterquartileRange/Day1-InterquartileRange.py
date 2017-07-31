@@ -1,18 +1,20 @@
 # Jboy Flaga
-# July 25, 2017
+# July 31, 2017
 
-def get_median(elements):
-    n_elements = len(elements)
+
+# these first part of the code were taken from Day1-Qaurtiles.py
+def get_median(list_of_elements):
+    n_elements = len(list_of_elements)
 
     if n_elements <= 0:
         return 0
     
     if n_elements % 2 == 0:
-        middle_item_1 = elements[(n_elements // 2) - 1]
-        middle_item_2 = elements[n_elements // 2]
+        middle_item_1 = list_of_elements[(n_elements // 2) - 1]
+        middle_item_2 = list_of_elements[n_elements // 2]
         median = (middle_item_1 + middle_item_2) / 2
     else:    
-        median = middle_item_2 = elements[n_elements // 2]
+        median = middle_item_2 = list_of_elements[n_elements // 2]
 
     return float(median)
 
@@ -48,26 +50,26 @@ def get_quartiles(elements):
 
     return (q1, q2, q3)
 
-def print_quartile(num):
-    # help from https://stackoverflow.com/questions/6681743/splitting-a-number-into-the-integer-and-decimal-parts-in-python#answer-6681778
-    decimal_part = num % 1
-    if decimal_part > 0.0:
-        return round(num, 1)
-    else:
-        return int(num // 1)
-
-
-f = open('input2.txt', 'r')
-
+### Get inputs from file
+f = open('input1.txt', 'r')
 num_of_elements = int(f.readline())
 elements = list(map(int, f.readline().split()))
+frequencies = list(map(int, f.readline().split()))
 
+### Get inputs from standard in
 # num_of_elements = int(input())
 # elements = list(map(int, input().split()))
-#print(elements)
+# frequencies = list(map(int, input().split()))
 
-(q1, q2, q3) = get_quartiles(elements)
+elems_with_freqs = []
+for i in range(num_of_elements):
+    elem = elements[i]
+    freq = frequencies[i]
+    for j in range(freq):
+        elems_with_freqs.append(elem)
 
-print(print_quartile(q1))
-print(print_quartile(q2))
-print(print_quartile(q3))
+# print(elems_with_freqs)
+
+(q1, q2, q3) = get_quartiles(elems_with_freqs)
+
+print(round(q3 - q1, 1))
