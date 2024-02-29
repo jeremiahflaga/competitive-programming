@@ -28,3 +28,5 @@ def hello(name=''):
         return 'Hello, World!'
     else:
         return 'Hello, {}!'.format(name)
+
+print(hello("jboy"))
