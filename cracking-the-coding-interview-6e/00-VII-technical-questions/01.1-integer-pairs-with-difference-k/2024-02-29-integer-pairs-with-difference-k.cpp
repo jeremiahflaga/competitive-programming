@@ -34,7 +34,8 @@ int countIntegerPairsWithDifferenceK_UsingHashTable(vector<int> v, int k) {
     }
     int count = 0;
     for (int i = 0; i < v.size(); i++) {
-        if(hashTable.find(v[i]+k) != hashTable.end()) {
+        bool isPairFound = hashTable.find(v[i]+k) != hashTable.end();
+        if(isPairFound) {
             count++;
         }
     }
