@@ -1,12 +1,23 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-int factorial(int number) { return number <= 1 ? 1 : factorial(number - 1) * number; }
+#include <iostream>
 
-TEST_CASE("testing the factorial function") {
-    CHECK(factorial(0) == 0);
-    CHECK(factorial(1) == 1);
-    CHECK(factorial(2) == 2);
-    CHECK(factorial(3) == 6);
-    CHECK(factorial(10) == 3628800);
+using namespace std;
+
+string hello(string name) {
+    if (name == "")
+        return "Hello, World!";
+    else
+        return "Hello, " + name + "!";
+}
+
+TEST_CASE("testing hello") {
+    CHECK(hello("") == "Hello, World!");
+    CHECK(hello("jboy") == "Hello, jboy!");
+
+    string name;
+    CHECK(hello(name) == "Hello, World!");
+    
+    CHECK(hello("Jürgen") == "Hello, Jürgen!");
 }
