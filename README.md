@@ -51,6 +51,21 @@ g++ 2024-02-29-hello-world-with-unit-tests.cpp -o hello-world
 hello-world
 ```
 
+To tell the compiler to use specific version of C++, like C++11 only (with features of C++14 excluded):
+
+```
+g++ -std=c++11 2024-02-29-hello-world-with-unit-tests.cpp & a
+```
+
+Other g++ flags for specifying compiler version to use:
+
+```
+g++ -std=c++98 ...
+g++ -std=c++14 ...
+g++ -std=c++17 ...
+g++ -std=c++2a ...
+```
+
 It will output something like this:
 
 ```
