@@ -1,49 +1,58 @@
+# use a decreasing monotonic stack: https://www.geeksforgeeks.org/introduction-to-monotonic-stack-data-structure-and-algorithm-tutorials/
 
 from typing import List
 
-class Elem:
-    def __init__(self, value, index):
-        self.value = value
-        self.index = index
+# class Elem:
+#     def __init__(self, value, index):
+#         self.value = value
+#         self.index = index
 
 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]: 
+
       temparaturesLength = len(temperatures)
-      output = list(range(0, temparaturesLength))
+      output = [0] * temparaturesLength
       stack = [] # stack using list
 
-      stack.append(Elem(temperatures[0], 0))
-      for i in range(1, temparaturesLength):
+      # print("====================================")
+      for i in range(0, temparaturesLength):
         currentValue = temperatures[i]
-        stackTopElem = stack.pop()
-        if currentValue > stackTopElem.value:
-          stack.append(Elem(currentValue, i))
-          difference = i - stackTopElem.index
-          # print("GT => i=", i, " ", "stackTopElem.index=", stackTopElem.index, 
-          #       " ", "currentValue=", currentValue, "", "difference=", difference)
-          output[stackTopElem.index] = difference
-          # print("len(stack)", len(stack))
-        elif currentValue == stackTopElem.value:
-          # print("EQ -> i=", i, " ", "stackTopElem.index=", stackTopElem.index, " ", "currentValue=", currentValue)
-          stack.append(Elem(currentValue, i))
-          output[stackTopElem.index] = 0
-          # print("len(stack)", len(stack))
-        else:
-          # print("LT -> i=", i, " ", "stackTopElem.index=", stackTopElem.index, " ", "currentValue=", currentValue)
-          stack.append(stackTopElem)
-          stack.append(Elem(currentValue, i))
-          # print("len(stack)", len(stack))
-      
-      # print("len(stack)", len(stack))
-      if (len(stack) > 0):
-        for i in range(1, len(stack)):
-          elem = stack[i]
-          output[elem.index] = 0           
 
-      output[temparaturesLength-1] = 0
+        # While stack is not empty AND top of stack is more than the current element
+        while stack and temperatures[stack[-1]] < currentValue:
+            # print("\twhile...")
+            # print("\tstack=", *stack,  sep = ", ")
+            # print("\toutput=", *output,  sep = ", ")
+
+            # Pop the top element from the stack
+            indexFromStack = stack.pop()
+            difference = i - indexFromStack
+            output[indexFromStack] = difference
+            
+            # print("\ti=", i, " ", "indexFromStack=", indexFromStack, " ", 
+            #       "temperatures[indexFromStack]=", temperatures[indexFromStack], " ", 
+            #       "currentValue=", currentValue,  " ", 
+            #       "difference=", difference)
+            # print("====================================")
+  
+        # print("after while...")
+        # print("stack=", *stack,  sep = ", ")
+        # print("output=", *output,  sep = ", ")
+
+        # Push the current element into the stack
+        stack.append(i)
+
+        # print("====================================")
+
+      # print("stack=", *stack,  sep = ", ")
+      # print("output=", *output,  sep = ", ")
+
+      while stack:
+         indexFromStack = stack.pop()
+         output[indexFromStack] = 0
+
       return output
-
                 
                 
 while True:
