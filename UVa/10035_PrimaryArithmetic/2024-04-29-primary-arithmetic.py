@@ -7,18 +7,27 @@ while True:
       break
 
     carry_counter = 0;
-    for i in range(10, -1, -1):
-      divisor = pow(10, i)
-      digit_from_a = a // divisor
-      digit_from_b = b // divisor
+    remainder = 0
+    for i in range(1, 11):
+      # divisor = pow(10, i)
+      digit_from_a = a % 10
+      digit_from_b = b % 10
 
-      
-      # print("sum=", digit_from_a + digit_from_b)
-      if digit_from_a + digit_from_b >= 10:
+      sum = digit_from_a + digit_from_b + remainder
+      # print(" a=", a, 
+      #       " b=", b, 
+      #       " digit_from_a=", digit_from_a, 
+      #       " digit_from_b=", digit_from_b, 
+      #       " remainder=", remainder, 
+      #       " sum=", sum)
+      if sum >= 10:
         carry_counter += 1
-      
-      a = a - (divisor * digit_from_a)
-      b = b - (divisor * digit_from_b)
+        remainder = 1
+      else:
+        remainder = 0
+        
+      a = a // 10
+      b = b // 10
       
     if carry_counter == 0:
       print("No carry operation.")
