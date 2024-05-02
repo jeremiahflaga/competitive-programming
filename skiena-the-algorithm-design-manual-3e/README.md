@@ -4,15 +4,17 @@ Steven S. Skiena
 
 https://www.algorist.com/
 
+**Solved Problems:**
+
 ## Chapter 1
 
 **LeetCode**
 
-1-1. [739 - "Daily Temperatures"](https://leetcode.com/problems/daily-temperatures/description/)
+1-1. ["Daily Temperatures" - 739](https://leetcode.com/problems/daily-temperatures/description/)
 
 **UVa**
 
-1-1. [100 - "The 3n + 1 problem"](https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=36)
+1-1. ["The 3n + 1 problem" - 100](https://onlinejudge.org/index.php?option=onlinejudge&Itemid=8&page=show_problem&problem=36)
 
 
 
@@ -20,4 +22,10 @@ https://www.algorist.com/
 
 **UVa**
 
-2-1. [10035 - "Primary Arithmetic"](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=976)
+2-1. ["Primary Arithmetic" - 10035](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=976)
+
+## Chapter 3
+
+**UVa**
+
+3-1. ["Jolly Jumpers" - 10038](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=979)
