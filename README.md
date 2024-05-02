@@ -2,9 +2,12 @@
 
 ## NOTE: There are also READMEs in some individual folders in this repository, for example in the folder `/UVa/` and `/HackerRank/10DaysOfStatistics/`. 
 
-https://www.hackerrank.com
+[UVa Online Judge](https://uva.onlinejudge.org) - [my statistics](http://uhunt.felix-halim.net/id/52989)
 
-https://uva.onlinejudge.org [My statistics](http://uhunt.felix-halim.net/id/52989)
+[LeetCode profile](https://leetcode.com/u/jflaga/)
+
+[HackerRank profile](https://www.hackerrank.com/profile/jflaga)
+
 
 ## Some NOTE for running some of the C++ programs here:
 
@@ -26,9 +29,11 @@ $ python 00100-2024-02-08_3n+1Problem-CSE-373-Fall-2020.py < input.txt > output.
 
 ## Running C++ file with unit tests, on Windows using g++ and [doctest](https://github.com/doctest/doctest) located in /_libraries/doctest.h
 
-([doctest tutorial](https://github.com/doctest/doctest/blob/master/doc/markdown/tutorial.md))
+- [C++ compiler](https://code.visualstudio.com/docs/cpp/config-mingw)
 
-Open Command Prompt (**not** Terminal)
+- [doctest tutorial](https://github.com/doctest/doctest/blob/master/doc/markdown/tutorial.md)
+
+Open **Command Prompt** (**not** Terminal)
 
 See if the environment variable `CPLUS_INCLUDE_PATH` is already set to the `\__libraries\` directory:
 
