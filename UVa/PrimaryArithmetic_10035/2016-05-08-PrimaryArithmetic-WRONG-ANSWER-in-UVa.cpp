@@ -4,6 +4,7 @@
 //				May 8, 2016 2:30 AM - wrong answer because the output for 1 carry operation is "1 carry operation" with no "s" at the end
 //				May 8, 2016 2:35 AM - wrong answer because the output has no period at the end
 //				May 8, 2016 2:37 AM - Correct answer already when I submitted in codechef.com (I submitted it there because it was the page that came out of google when I searched for the problem using the "problem description" --- because I have to solve this because I gave it as a problem for Dina Bolanos to solve to be able to join the progamming club I want to start
+//									- CodeChef DPC101 "Carry" (My submission: https://www.codechef.com/viewsolution/10022077)
 //									- but still not correct answer in UVA Online Judge
 
 //It looks like Microsoft has deprecated lots of calls which use buffers to improve code security.
