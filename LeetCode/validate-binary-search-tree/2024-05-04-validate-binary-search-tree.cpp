@@ -34,31 +34,31 @@ public:
         if (root == nullptr)
             return true;
 
-        // cout << "START: Root=" << root->val << " minVal=" << INT_MIN << " maxVal=" << INT_MAX << endl;
+        // cout << "START: Root=" << root->val << " minVal=" << LLONG_MIN << " maxVal=" << LLONG_MAX << endl;
 
         if (root->left != nullptr && root->left->val >= root->val)
             return false;
         if (root->right != nullptr && root->right->val <= root->val)
             return false;
  
-        bool leftResult = isValidBSTHelper(root->left, INT_MIN, root->val);
-        bool rightResult = isValidBSTHelper(root->right, root->val, INT_MAX);
+        
+        // special case for inputs involving INT_MIN and INT_MAX, like [-2147483648,null,2147483647] or [-2147483648,null,2147483647,-2147483648]
+        // From the Discussion section: Exclusive Tip : Use LLONG_MIN instead of INT_MIN
+        bool leftResult = isValidBSTHelper(root->left, LLONG_MIN, root->val);
+        bool rightResult = isValidBSTHelper(root->right, root->val, LLONG_MAX);
         
         // cout << "END: leftResult=" << leftResult << " rightResult=" << rightResult << endl;
 
         return leftResult && rightResult;
     }
 
-    bool isValidBSTHelper(TreeNode* root, int minVal, int maxVal) {        
+    bool isValidBSTHelper(TreeNode* root, long long minVal, long long maxVal) {        
         if (root == nullptr)
             return true;
 
         // cout << "Root=" << root->val << " minVal=" << minVal << " maxVal=" << maxVal << endl;
-        
-        // special case for inputs involving INT_MIN and INT_MAX, like [-2147483648,null,2147483647]
-        if (root->val >= maxVal && !(maxVal == INT_MAX && root->val == INT_MAX))
-            return false;        
-        if (root->val <= minVal && !(minVal == INT_MIN && root->val == INT_MIN))
+
+        if (root->val <= minVal || root->val >= maxVal)
             return false;
         
         if (root->left != nullptr && root->left->val >= root->val)
@@ -66,7 +66,9 @@ public:
         if (root->right != nullptr && root->right->val <= root->val)
             return false;
  
+        // cout <<"Going Left" << endl;
         bool leftResult = isValidBSTHelper(root->left, minVal, root->val);
+        // cout <<"Going Right" << endl;
         bool rightResult = isValidBSTHelper(root->right, root->val, maxVal);
         
         // cout << "leftResult=" << leftResult << " rightResult=" << rightResult << endl;
@@ -244,6 +246,15 @@ TEST_CASE("[INT_MIN,INT_MIN,null]") {
 TEST_CASE("[INT_MAX,null,INT_MAX]") {
     TreeNode* root = new TreeNode(INT_MAX,
         nullptr, new TreeNode(INT_MAX));
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+// [-2147483648,null,2147483647,-2147483648]
+TEST_CASE("[INT_MIN,null,INT_MAX,INT_MIN]") {
+    TreeNode* root = new TreeNode(INT_MIN,
+        nullptr, new TreeNode(INT_MAX,
+            new TreeNode(INT_MIN), nullptr));
     Solution sol;
     CHECK(sol.isValidBST(root) == false);
 }
