@@ -36,58 +36,42 @@ public:
 
         // cout << "START: Root=" << root->val << " minVal=" << INT_MIN << " maxVal=" << INT_MAX << endl;
 
-        bool leftResult = isValidBSTForLeft(root->left, INT_MIN, root->val);
-        bool rightResult = isValidBSTForRigth(root->right, root->val, INT_MAX);
+        if (root->left != nullptr && root->left->val > root->val)
+            return false;
+        if (root->right != nullptr && root->right->val < root->val)
+            return false;
+ 
+        bool leftResult = isValidBSTHelper(root->left, INT_MIN, root->val);
+        bool rightResult = isValidBSTHelper(root->right, root->val, INT_MAX);
         
         // cout << "END: leftResult=" << leftResult << " rightResult=" << rightResult << endl;
 
         return leftResult && rightResult;
     }
-    
-    bool isValidBSTForLeft(TreeNode* root, int minVal, int maxVal) {
+
+    bool isValidBSTHelper(TreeNode* root, int minVal, int maxVal) {        
         if (root == nullptr)
             return true;
-        
+
         // cout << "Root=" << root->val << " minVal=" << minVal << " maxVal=" << maxVal << endl;
-
-        if (root->val >= maxVal)
+        
+        if (root->val <= minVal || root->val >= maxVal)
             return false;
-
         if (root->left != nullptr && root->left->val > root->val)
             return false;
         if (root->right != nullptr && root->right->val < root->val)
             return false;
-
-        bool leftResult = isValidBSTForLeft(root->left, INT_MIN, root->val);
-        bool rightResult = isValidBSTForLeft(root->right, root->val, maxVal);
-
-        // cout << "leftResult=" << leftResult << " rightResult=" << rightResult << endl;
-
-        return leftResult && rightResult;
-    }
-    
-    bool isValidBSTForRigth(TreeNode* root, int minVal, int maxVal) {
-        if (root == nullptr)
-            return true;
+ 
+        bool leftResult = isValidBSTHelper(root->left, minVal, root->val);
+        bool rightResult = isValidBSTHelper(root->right, root->val, maxVal);
         
-        // cout << "Root=" << root->val << " minVal=" << minVal << " maxVal=" << maxVal << endl;
-
-        if (root->val <= minVal)
-            return false;
-
-        if (root->left != nullptr && root->left->val > root->val)
-            return false;
-        if (root->right != nullptr && root->right->val < root->val)
-            return false;
-
-        bool leftResult = isValidBSTForRigth(root->left, minVal, root->val);
-        bool rightResult = isValidBSTForRigth(root->right, root->val, INT_MAX);
-
         // cout << "leftResult=" << leftResult << " rightResult=" << rightResult << endl;
-
-        return leftResult && rightResult;
+  
+        return leftResult && rightResult;    
     }
 };
+
+/////////////////////////////////////////////////////////////////////
 
 TEST_CASE("single node: [3]") {
     TreeNode* root = new TreeNode(3);
@@ -200,6 +184,21 @@ TEST_CASE("[2,2,2]") {
 TEST_CASE("[2,2,3]") {
     TreeNode* root = new TreeNode(2,
         new TreeNode(2), new TreeNode(3));
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[3,null,30,10,null,null,15,null,45]") {
+    TreeNode* root = new TreeNode(3,
+        nullptr, new TreeNode(30,
+            new TreeNode(10
+                nullptr, new TreeNode(15,
+                    nullptr, new TreeNode(45)
+                ), 
+            nullptr
+            )
+        )
+    );
     Solution sol;
     CHECK(sol.isValidBST(root) == false);
 }
