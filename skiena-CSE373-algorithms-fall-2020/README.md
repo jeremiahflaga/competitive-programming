@@ -8,3 +8,5 @@ Extra credit programming challenges (UVa Online Judge)
 
 - week 1: 110101 3n+1 (100)
 - week 2: 110201 Jolly Jumpers (10038)
+
+**Please see folder named `/skiena-the-algorithm-design-manual-3e` in the root directory**
