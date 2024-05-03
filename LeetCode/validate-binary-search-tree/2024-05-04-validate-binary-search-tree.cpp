@@ -34,10 +34,13 @@ public:
         if (root == nullptr)
             return true;
 
-        // cout << "Root=" << root->val << " minVal=" << INT_MIN << " maxVal=" << INT_MAX << endl;
+        // cout << "START: Root=" << root->val << " minVal=" << INT_MIN << " maxVal=" << INT_MAX << endl;
 
         bool leftResult = isValidBSTForLeft(root->left, INT_MIN, root->val);
         bool rightResult = isValidBSTForRigth(root->right, root->val, INT_MAX);
+        
+        // cout << "END: leftResult=" << leftResult << " rightResult=" << rightResult << endl;
+
         return leftResult && rightResult;
     }
     
@@ -47,7 +50,7 @@ public:
         
         // cout << "Root=" << root->val << " minVal=" << minVal << " maxVal=" << maxVal << endl;
 
-        if (root->val > maxVal)
+        if (root->val >= maxVal)
             return false;
 
         if (root->left != nullptr && root->left->val > root->val)
@@ -169,6 +172,34 @@ TEST_CASE("[2,2,1]") {
 TEST_CASE("[2,1,2]") {
     TreeNode* root = new TreeNode(2,
         new TreeNode(1), new TreeNode(2));
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[1,1]") {
+    TreeNode* root = new TreeNode(1,
+        new TreeNode(1), nullptr);
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[2,2]") {
+    TreeNode* root = new TreeNode(2,
+        new TreeNode(2), nullptr);
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[2,2,2]") {
+    TreeNode* root = new TreeNode(2,
+        new TreeNode(2), new TreeNode(2));
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[2,2,3]") {
+    TreeNode* root = new TreeNode(2,
+        new TreeNode(2), new TreeNode(3));
     Solution sol;
     CHECK(sol.isValidBST(root) == false);
 }
