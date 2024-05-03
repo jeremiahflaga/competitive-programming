@@ -36,9 +36,9 @@ public:
 
         // cout << "START: Root=" << root->val << " minVal=" << INT_MIN << " maxVal=" << INT_MAX << endl;
 
-        if (root->left != nullptr && root->left->val > root->val)
+        if (root->left != nullptr && root->left->val >= root->val)
             return false;
-        if (root->right != nullptr && root->right->val < root->val)
+        if (root->right != nullptr && root->right->val <= root->val)
             return false;
  
         bool leftResult = isValidBSTHelper(root->left, INT_MIN, root->val);
@@ -55,11 +55,15 @@ public:
 
         // cout << "Root=" << root->val << " minVal=" << minVal << " maxVal=" << maxVal << endl;
         
-        if (root->val <= minVal || root->val >= maxVal)
+        // special case for inputs involving INT_MIN and INT_MAX, like [-2147483648,null,2147483647]
+        if (root->val >= maxVal && !(maxVal == INT_MAX && root->val == INT_MAX))
+            return false;        
+        if (root->val <= minVal && !(minVal == INT_MIN && root->val == INT_MIN))
             return false;
-        if (root->left != nullptr && root->left->val > root->val)
+        
+        if (root->left != nullptr && root->left->val >= root->val)
             return false;
-        if (root->right != nullptr && root->right->val < root->val)
+        if (root->right != nullptr && root->right->val <= root->val)
             return false;
  
         bool leftResult = isValidBSTHelper(root->left, minVal, root->val);
@@ -191,14 +195,55 @@ TEST_CASE("[2,2,3]") {
 TEST_CASE("[3,null,30,10,null,null,15,null,45]") {
     TreeNode* root = new TreeNode(3,
         nullptr, new TreeNode(30,
-            new TreeNode(10
+            new TreeNode(10,
                 nullptr, new TreeNode(15,
-                    nullptr, new TreeNode(45)
-                ), 
-            nullptr
+                    nullptr, new TreeNode(45))
+                ), nullptr
             )
-        )
-    );
+        );
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+// [-2147483648,null,2147483647]
+TEST_CASE("[INT_MIN,null,INT_MAX]") {
+    TreeNode* root = new TreeNode(INT_MIN,
+        nullptr, new TreeNode(INT_MAX));
+    Solution sol;
+    CHECK(sol.isValidBST(root) == true);
+}
+
+TEST_CASE("[INT_MAX,INT_MIN,null]") {
+    TreeNode* root = new TreeNode(INT_MAX,
+        new TreeNode(INT_MIN), nullptr);
+    Solution sol;
+    CHECK(sol.isValidBST(root) == true);
+}
+
+TEST_CASE("[INT_MIN,INT_MAX,null]") {
+    TreeNode* root = new TreeNode(INT_MIN,
+        new TreeNode(INT_MAX), nullptr);
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[INT_MAX,null,INT_MIN]") {
+    TreeNode* root = new TreeNode(INT_MAX,
+        nullptr, new TreeNode(INT_MIN));
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[INT_MIN,INT_MIN,null]") {
+    TreeNode* root = new TreeNode(INT_MIN,
+        new TreeNode(INT_MIN), nullptr);
+    Solution sol;
+    CHECK(sol.isValidBST(root) == false);
+}
+
+TEST_CASE("[INT_MAX,null,INT_MAX]") {
+    TreeNode* root = new TreeNode(INT_MAX,
+        nullptr, new TreeNode(INT_MAX));
     Solution sol;
     CHECK(sol.isValidBST(root) == false);
 }
